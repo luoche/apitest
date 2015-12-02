@@ -1,0 +1,120 @@
+
+/* seeed api page css style
+ * seeed api page
+ * @vaan kong 2015-11-30
+ */
+
+/*public style*/
+/*display*/
+.dn { display: none;}
+.db { display: block;}
+.dib { display: inline-block;}
+/*position*/
+.abs { position: absolute;}
+.rel { position: relative;}
+.fd { position: fixed;}
+/*float*/
+.fl { float: left;}
+.fr { float: right;}
+/*位置处理*/
+.tc { text-align: center;}
+/*清除浮动*/
+.fix{ *zoom:1;} .fix:after { display: block; content: ""; clear: both;}
+/*水平居中*/
+.mao { margin-left: auto; margin-right: auto;}
+.cup { cursor: pointer;}
+/*font-size*/
+.b { font-weight: bold;}
+.f16 { font-size: 16px;}
+.f18 { font-size: 18px;}
+.f25 { font-size: 25px;}
+.f35 { font-size: 35px;}
+/*margin*/
+.mr5 { margin-right: 5px;}
+.mr10 { margin-right: 10px;}
+.mr15 { margin-right: 15px;}
+.mr20 { margin-right: 20px;}
+.mt10 { margin-top: 10px;}
+.mt20 { margin-top: 20px;}
+.mt40 { margin-top: 40px;}
+/*line*/
+.b-t {border-top: 1px solid #ddd;}
+.b-b {border-bottom: 1px solid #ddd;}
+
+/*body style*/
+body, input, select, textarea, button {
+    font-family: 'Microsoft YaHei','Source Sans Pro', Helvetica, Arial, sans-serif;
+/*    font-size: 14px;*/
+}
+
+/*重置全局a样式，访问hours均不出现下划线*/
+a:hover, a:visited, a:link { text-decoration: none;}
+ul li { list-style-type: none;}
+
+.w100p { width: 100%;}
+
+/*color style*/
+
+
+/*
+ * body style
+ */
+
+.container { width: 960px;}
+#main-nav { margin-top: 30px;}
+form { 
+    padding: 10px 50px 50px 50px;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 50px;
+    min-height: 600px;
+}
+.add-row {
+    cursor: pointer;
+    font-size: 30px;
+    font-weight: bold;
+    top: 0;
+    right: -7px;
+    padding: 10px 20px;
+    transition: all 0.3s;
+}
+.add-row:hover {
+    top: -5px;
+}
+.w50p { width: 20%;}
+.remove-row { 
+    font-size: 20px;
+    cursor: pointer;
+    color: #f53636;
+}
+.title { 
+    padding: 10px;
+    margin-bottom: 10px;
+    margin-top: 40px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
