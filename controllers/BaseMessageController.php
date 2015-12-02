@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Yii;
+use yii\helpers\Url;
 use app\models\baseMessage;
 use app\models\Search;
 use yii\web\Controller;
@@ -112,7 +113,7 @@ class BaseMessageController extends Controller
     {
         $request = Yii::$app->request;
         $data = $request->post();
-        $b_id = ArrayHelper::getValue($datam,'b_id',0);
+        $b_id = ArrayHelper::getValue($data,'b_id',0);
         ArrayHelper::remove($data, 'b_id');
         $deal_data = $this->dealPostParam($data);
         $base_message_model = new BaseMessage();
@@ -120,13 +121,36 @@ class BaseMessageController extends Controller
         $deal = $base_message_model->addAllApiMessage($deal_data,$b_id);
 
         if ($deal) {
-            return $this->redirect('index');
+            $url = Url::toRoute(['index/index']);
+            return $this->redirect($url);
             // echo json_encode(['errorcode'=>0,'msg'=>'添加成功','data'=>['b_id'=>$model->id]]);exit;
         } else {
             echo json_encode(['errorcode'=>1,'msg'=>'添加失败']);exit;
         }
     }
 
+    public function actionAjaxApiEdit()
+    {
+        $request = Yii::$app->request;
+        $post = $request->post();
+        // dump($request->post());
+        $base_message = ArrayHelper::getValue($post,'BasicMessage');
+        ArrayHelper::remove($post,'BasicMessage');
+        $b_id = intval($base_message['id']);
+
+        // 处理基本信息
+        $base_message_model = new BaseMessage();
+        $save_base_message = $base_message_model->updateBaseMessage($b_id,$base_message);
+        // 处理info信息
+        $deal_data =  $this->dealPostParam($post);
+        $deal = $base_message_model->editAllApiMessage($deal_data,$b_id);
+        if ($deal) {
+            $url = Url::toRoute(['index/api-detail','id'=>$b_id]);
+            return $this->redirect($url);
+        } else {
+            echo json_encode(['errorcode'=>1,'msg'=>'添加失败']);exit;
+        }
+    }
     public function dealPostParam($data)
     {
         $return = [];

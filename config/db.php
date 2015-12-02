@@ -3,9 +3,7 @@
 return [
     'class' => 'yii\db\Connection',
     'dsn' => 'mysql:host=192.168.1.40;dbname=tool',
-    // 'dsn' => 'mysql:host=localhost;dbname=seeed_api',
     'username' => 'root',
-    // 'password' => 'root',
     'password' => 'int@1515',
     'charset' => 'utf8',
     'tablePrefix' => 'api_',

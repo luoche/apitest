@@ -159,7 +159,6 @@
                               <select class="form-control" name="PostParam_type[]">
                                   <option value="INT" selected>INT</option>
                                   <option value="STRING">STRING</option>
-                                  <option value="INT">INT</option>
                                   <option value="CHAR">CHAR</option>
                                   <option value="VARCHAR">VARCHAR</option>
                                   <option value="TEXT">TEXT</option>
@@ -200,7 +199,6 @@
                               <select class="form-control" name="ReturnParam_type[]">
                                   <option value="INT" selected>INT</option>
                                   <option value="STRING">STRING</option>
-                                  <option value="INT">INT</option>
                                   <option value="CHAR">CHAR</option>
                                   <option value="VARCHAR">VARCHAR</option>
                                   <option value="TEXT">TEXT</option>
