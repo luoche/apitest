@@ -122,4 +122,21 @@ class BaseController extends Controller
 
         return $ret;
     }
+
+    public function getReferHtml()
+    {
+        return $_SERVER['HTTP_REFERER'];
+    }
+
+    public function goRefer()
+    {
+        $before = $this->getReferHtml();
+        return $this->redirect($before);
+
+        // header(location:你的上一页的路径);   //   注意这个函数前不能有输出    
+
+        // return header("location:$before");   //   返回其调用页面  
+
+        // echo "<script>history.go(-1);</script>";  
+    }
 }

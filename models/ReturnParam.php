@@ -9,10 +9,13 @@ use Yii;
  *
  * @property string $id
  * @property integer $b_id
- * @property integer $errorcode
- * @property string $msg
- * @property string $data
- * @property string $status
+ * @property string $name
+ * @property string $type
+ * @property integer $sort
+ * @property integer $is_required
+ * @property string $value
+ * @property string $detail
+ * @property integer $status
  */
 class ReturnParam extends \yii\db\ActiveRecord
 {
@@ -30,10 +33,8 @@ class ReturnParam extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['b_id', 'errorcode', 'msg'], 'required'],
-            [['b_id', 'errorcode'], 'integer'],
-            [['data'], 'string'],
-            [['msg', 'status'], 'string', 'max' => 255]
+            [['b_id', 'sort', 'is_required', 'status'], 'integer'],
+            [['name', 'type', 'value', 'detail'], 'string', 'max' => 255]
         ];
     }
 
@@ -44,11 +45,14 @@ class ReturnParam extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', '主键id'),
-            'b_id' => Yii::t('app', 'api基本信息对应的id'),
-            'errorcode' => Yii::t('app', '错误代码'),
-            'msg' => Yii::t('app', '返回信息'),
-            'data' => Yii::t('app', '返回数据'),
-            'status' => Yii::t('app', '状态值（1：使用 0：禁止）'),
+            'b_id' => Yii::t('app', '基本表对应的id'),
+            'name' => Yii::t('app', '参数名称'),
+            'type' => Yii::t('app', '参数类型（如int string）'),
+            'sort' => Yii::t('app', '排序'),
+            'is_required' => Yii::t('app', '是否必须（1：必须 0：非必须）'),
+            'value' => Yii::t('app', '对应的值'),
+            'detail' => Yii::t('app', '描述'),
+            'status' => Yii::t('app', '状态（1：显示 0：隐藏）'),
         ];
     }
 }

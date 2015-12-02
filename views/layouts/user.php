@@ -32,10 +32,6 @@ AppAsset::register($this);
 </head>
 <body>
 <?php $this->beginBody() ?>
-<!-- <?php dump($this)?> -->
-<!-- <?php dump(Yii::$app)?> -->
-<!-- <?php dump(Yii::$app->charset)?> -->
-<!-- <?php dump(Yii::$app->requestedAction->actionMethod)?> -->
 <div class="wrap">
     <?php
     NavBar::begin([
