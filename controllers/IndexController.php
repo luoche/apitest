@@ -70,7 +70,61 @@ class IndexController extends BaseController
         return ['base_message'=>$base_message,'post_param'=>$post_param,'return_param'=>$return_param,'return_code'=>$return_code,'error_msg'=>$error_msg];
     }
 
-   
+    public function actionApiList()
+    {
+        $request = Yii::$app->request;
+        $like = ArrayHelper::getValue($request->post(),'search');
+
+        //先在C层写 再在M层写
+        $like   = '2';
+        $query  = BaseMessage::find();
+        if (!empty($like)) {
+            $query->andFilterWhere(['like','name',$like])
+                ->orFilterWhere(['like','url',$like]);
+        }
+        $query->andFilterWhere(['status'=>BaseMessage::STATUS_ACTIVE]);
+        $command = $query->createCommand();
+        $return  = $this->apiCommonLst($command);
+    }
+
+
+    public function actionApiCate()
+    {
+        $like = '2';
+        $cate = 22;
+        $request = Yii::$app->request;
+        $like = ArrayHelper::getValue($request->post(),'search');
+        $cate = ArrayHelper::getValue($request->get(),'cate');
+        if (empty($cate)) {
+            return $this->redirect(Url::toRoute(['index/api-list']));
+        }
+        $query= BaseMessage::find();
+        if (!empty($like)) {
+            $query->andFilterWhere(['like','name',$like])
+                ->orFilterWhere(['like','url',$like]);
+        }
+        $query->andFilterWhere(['cate'=>$cate])
+              ->andFilterWhere(['status'=>BaseMessage::STATUS_ACTIVE]);
+        $command = $query->createCommand();
+        $return  = $this->apiCommonLst($command);
+    }
+
+    /**
+     * 根据查询条件返回数据
+     * @dates  2015-12-03
+     * @author wangyafei
+     * @param  object     $command  操作对象
+     * @return array                处理过的数组
+     */
+    public function apiCommonLst($command)
+    {
+        // echo $command->sql;
+        $rows = $command->queryAll();
+        // dump($rows);
+        return $rows;
+    }
+
+
 
 
 

@@ -27,6 +27,7 @@ use app\models\ErrorMessage;
  */
 class BaseMessage extends \yii\db\ActiveRecord
 {
+    CONST STATUS_ACTIVE = 1;
     /**
      * @inheritdoc
      */
