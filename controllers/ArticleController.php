@@ -32,8 +32,6 @@ class ArticleController extends Controller
      */
     public function actionIndex()
     {
-        // dump(111);
-        // exit;
         $searchModel = new ArticleSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -64,8 +62,6 @@ class ArticleController extends Controller
     {
         $model = new Article();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-        // dump(Yii::$app->request->post());
-        // exit;
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [

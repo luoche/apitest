@@ -37,9 +37,9 @@ class BaseMessageController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new Search();
+        $searchModel  = new Search();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -85,8 +85,8 @@ class BaseMessageController extends Controller
     public function actionAjaxAdd()
     {
         $request = Yii::$app->request;
-        $model = new BaseMessage();
-        $data = $request->post();
+        $model   = new BaseMessage();
+        $data    = $request->post();
         if ($model->load($data)) {
             $model->url      = trim($model->url);
             $model->detail   = trim($model->detail);
@@ -98,7 +98,7 @@ class BaseMessageController extends Controller
             $model->role_apply_level = 1;
             $flag = $model->save();
             if (!$flag) {
-                $errors = array_values($model->getErrors());
+                $errors    = array_values($model->getErrors());
                 $error_msg = ArrayHelper::getValue($errors[0],0);
                 echo json_encode(['errorcode'=>1,'msg'=>$error_msg]);exit;
             } else {
@@ -112,18 +112,17 @@ class BaseMessageController extends Controller
     public function actionAjaxAddAll()
     {
         $request = Yii::$app->request;
-        $data = $request->post();
-        $b_id = ArrayHelper::getValue($data,'b_id',0);
+        $data    = $request->post();
+        $b_id    = ArrayHelper::getValue($data,'b_id',0);
         ArrayHelper::remove($data, 'b_id');
         $deal_data = $this->dealPostParam($data);
         $base_message_model = new BaseMessage();
         //在model层处理不同的数组
-        $deal = $base_message_model->addAllApiMessage($deal_data,$b_id);
+        $deal    = $base_message_model->addAllApiMessage($deal_data,$b_id);
 
         if ($deal) {
             $url = Url::toRoute(['index/index']);
             return $this->redirect($url);
-            // echo json_encode(['errorcode'=>0,'msg'=>'添加成功','data'=>['b_id'=>$model->id]]);exit;
         } else {
             echo json_encode(['errorcode'=>1,'msg'=>'添加失败']);exit;
         }
@@ -132,20 +131,18 @@ class BaseMessageController extends Controller
     public function actionAjaxApiEdit()
     {
         $request = Yii::$app->request;
-        $post = $request->post();
-        // dump($request->post());
+        $post    = $request->post();
         $base_message = ArrayHelper::getValue($post,'BasicMessage');
         ArrayHelper::remove($post,'BasicMessage');
-        $b_id = intval($base_message['id']);
-
+        $b_id    = intval($base_message['id']);
         // 处理基本信息
         $base_message_model = new BaseMessage();
-        $save_base_message = $base_message_model->updateBaseMessage($b_id,$base_message);
+        $save_base_message  = $base_message_model->updateBaseMessage($b_id,$base_message);
         // 处理info信息
         $deal_data =  $this->dealPostParam($post);
-        $deal = $base_message_model->editAllApiMessage($deal_data,$b_id);
+        $deal      = $base_message_model->editAllApiMessage($deal_data,$b_id);
         if ($deal) {
-            $url = Url::toRoute(['index/api-detail','id'=>$b_id]);
+            $url   = Url::toRoute(['index/api-detail','id'=>$b_id]);
             return $this->redirect($url);
         } else {
             echo json_encode(['errorcode'=>1,'msg'=>'添加失败']);exit;
@@ -156,8 +153,7 @@ class BaseMessageController extends Controller
         $return = [];
         if (!empty($data)) {
             foreach ($data as $ko => $vo) {
-                $arr = explode('_',$ko);
-                //第一次_的位置
+                $arr   = explode('_',$ko);
                 $index = strpos($ko,'_');
                 $table = substr($ko,0,$index); 
                 $field = substr($ko,$index+1); 

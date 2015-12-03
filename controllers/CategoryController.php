@@ -34,7 +34,7 @@ class CategoryController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new CategorySearch();
+        $searchModel  = new CategorySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -63,7 +63,7 @@ class CategoryController extends Controller
     public function actionCreate()
     {
         $request = Yii::$app->request;
-        $model = new Category();
+        $model   = new Category();
         return $this->render('create', [
             'model' => $model,
         ]);
@@ -72,10 +72,10 @@ class CategoryController extends Controller
     public function actionAjaxCreate()
     {
         $request = Yii::$app->request;
-        $model = new Category();
-        $data = $request->post();
+        $model   = new Category();
+        $data    = $request->post();
         if ($model->load($data)) {
-            $model->name = trim($model->name);
+            $model->name   = trim($model->name);
             $model->status = 1;
             $model->sort   = 1;
             $flag = $model->save();
@@ -95,14 +95,10 @@ class CategoryController extends Controller
             $model->sort   = 1;
             $flag = $model->save();
             if (!$flag) {
-                // return $this->render(['index/index'], ['model' => $model]);
                 echo  json_encode(['errorcode'=>1,'msg'=>'添加失败']);exit;
             } else {
                 echo json_encode(['errorcode'=>0,'msg'=>'添加成功']);exit;
             }
-
-            // dump($flag);
-            // return $this->redirect(['view', 'id' => $model->id]);
         }
     }
     /**
