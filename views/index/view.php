@@ -34,10 +34,10 @@
            <div class=" alert-info title">系统参数</div>
            <table class="table table-bordered table-hover">
                <tr class="active">
-                   <th style="width:20%;">名称</th>
+                   <th style="width:25%;">名称</th>
                    <th style="width:10%;">类型</th>
-                   <th style="width:10%;">是否必须</th>
-                   <th style="width:26%;">示例值</th>
+                   <th style="width:12%;">是否必须</th>
+                   <th style="width:20%;">示例值</th>
                    <th>描述</th>
                </tr>
                <?php foreach($post_param as $ko =>$vo):?>
@@ -55,10 +55,10 @@
            <div class=" alert-info title">返回参数</div>
            <table class="table table-bordered table-hover">
                <tr class="active">
-                   <th style="width:20%;">名称</th>
+                   <th style="width:25%;">名称</th>
                    <th style="width:10%;">类型</th>
-                   <th style="width:10%;">是否必须</th>
-                   <th style="width:26%;">示例值</th>
+                   <th style="width:12%;">是否必须</th>
+                   <th style="width:20%;">示例值</th>
                    <th>描述</th>
                </tr>
                <?php foreach($return_param as $ko =>$vo):?>

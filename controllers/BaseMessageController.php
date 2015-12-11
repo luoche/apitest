@@ -4,7 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use yii\helpers\Url;
-use app\models\baseMessage;
+use app\models\BaseMessage;
 use app\models\Search;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -39,7 +39,7 @@ class BaseMessageController extends Controller
     {
         $searchModel  = new Search();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -141,11 +141,13 @@ class BaseMessageController extends Controller
         // 处理info信息
         $deal_data =  $this->dealPostParam($post);
         $deal      = $base_message_model->editAllApiMessage($deal_data,$b_id);
-        if ($deal) {
+        if ($save_base_message || $deal) {//基本信息的修改
             $url   = Url::toRoute(['index/api-detail','id'=>$b_id]);
             return $this->redirect($url);
         } else {
-            echo json_encode(['errorcode'=>1,'msg'=>'添加失败']);exit;
+            $url = Url::toRoute(['index/api-edit','id'=>$b_id]);
+            return $this->redirect($url);
+            // echo json_encode(['errorcode'=>1,'msg'=>'添加失败']);exit;
         }
     }
     public function dealPostParam($data)

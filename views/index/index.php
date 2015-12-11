@@ -5,7 +5,7 @@
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>Seeed API Page</title>
         <meta name="description" content="">
-        <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
@@ -33,7 +33,7 @@
             
             <!--创建接口分类-->
             
-            <form class="form-horizontal tab-block" id="create-api-type" action="<?=$category['action_url'];?>" method="post">
+            <form class="form-horizontal tab-block form-block" id="create-api-type" action="<?=$category['action_url'];?>" method="post">
              <div class="page-header">
               <h1>创建接口分类</h1>
             </div>
@@ -65,14 +65,13 @@
             
             
             <!--创建接口参数-->
-            <!-- <form action="" method="post" class="form-horizontal dn tab-block" id="create-api-param"> -->
-            <div class="form-horizontal dn tab-block" id="create-api-param">
+            <div class="form-horizontal dn tab-block form-block " id="create-api-param">
                 <div class="page-header">
                   <h1>创建接口参数</h1>
                 </div>
                 <!--第一步-->
                 <div class="creat-api-step-1">
-                <form class="form-horizontal tab-block" id="create-api-type" action="<?=$BaseMessage['action_url'];?>" method="post">
+                <form class="form-horizontal" id="create-api-type" action="<?=$BaseMessage['action_url'];?>" method="post">
                     <div class="form-group">
                     <label for="inputPassword" class="col-sm-2 control-label">接口名称：</label>
                     <div class="col-sm-10">
@@ -82,7 +81,7 @@
                 <div class="form-group">
                     <label for="inputPassword" class="col-sm-2 control-label">接口URL：</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="" name="<?=$BaseMessage['tableName'];?>[url]" placeholder="分类名称">
+                      <input type="text" class="form-control" id="" name="<?=$BaseMessage['tableName'];?>[url]" placeholder="接口URL 默认<?=$apiHost?>以开头">
                     </div>
                   </div>
                   <div class="form-group">
@@ -148,7 +147,7 @@
                           <tr>
                                <th>名称</th>
                                <th>类型</th>
-                               <th>是否必须</th>
+                               <th style="width:12%;">是否必须</th>
                                <th>示例值</th>
                                <th>描述</th>
                                <th></th>
@@ -188,7 +187,7 @@
                         <tr>
                            <th>名称</th>
                            <th>类型</th>
-                           <th>是否必须</th>
+                           <th style="width:12%;">是否必须</th>
                            <th>示例值</th>
                            <th>描述</th>
                            <th></th>
@@ -253,9 +252,7 @@
                 </form>
             </div>
         </div>
-        
-        
-        
+		
         <script src="js/jquery-1.11.3.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/main.js"></script>

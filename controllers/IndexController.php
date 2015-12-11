@@ -17,6 +17,7 @@ use app\models\PostParam;
 use app\models\ReturnParam;
 use app\models\ReturnCode;
 use app\models\ErrorMessage;
+use app\models\Category;
 use app\models\Code;
 
 use yii\helpers\ArrayHelper;
@@ -27,9 +28,11 @@ class IndexController extends BaseController
     
     public $layout = false;
     public $enableCsrfValidation = false;
+    public $apiHost;
     public function init()
     {
         parent::init();
+        $this->apiHost = '192.168.1.40/seeed-cc/api/index.php?r=';
         $request  = Yii::$app->request;
         $userHost = Yii::$app->request->userHost;
         $userIP   = Yii::$app->request->userIP;
@@ -38,7 +41,7 @@ class IndexController extends BaseController
     {
         $category     = ['action_url'=>Url::toRoute(['category/ajax-create']),'tableName'=>'Category'];
         $base_message = ['action_url'=>Url::toRoute(['base-message/ajax-add']),'tableName'=>'BaseMessage','info_url'=>Url::toRoute(['base-message/ajax-add-all'])];
-        return $this->render('index',['BaseMessage'=>$base_message,'category'=>$category]);
+        return $this->render('index',['BaseMessage'=>$base_message,'category'=>$category,'apiHost'=>$this->apiHost]);
     }
 
 
@@ -70,13 +73,18 @@ class IndexController extends BaseController
         return ['base_message'=>$base_message,'post_param'=>$post_param,'return_param'=>$return_param,'return_code'=>$return_code,'error_msg'=>$error_msg];
     }
 
+    public function actionList()
+    {
+        $cateLst = Category::getAllCategory();
+        $data = ['cateLst'=>$cateLst];
+        return $this->render('list',['data'=>$data,'cate_url'=>Url::toRoute(['index/api-cate']),'url'=>Url::toRoute(['index/index']),'apiHost'=>$this->apiHost]);
+    }
     public function actionApiList()
     {
         $request = Yii::$app->request;
-        $like = ArrayHelper::getValue($request->post(),'search');
-
+        $like   = ArrayHelper::getValue($request->post(),'search');
         //先在C层写 再在M层写
-        $like   = '2';
+        // $like   = '2';
         $query  = BaseMessage::find();
         if (!empty($like)) {
             $query->andFilterWhere(['like','name',$like])
@@ -85,13 +93,13 @@ class IndexController extends BaseController
         $query->andFilterWhere(['status'=>BaseMessage::STATUS_ACTIVE]);
         $command = $query->createCommand();
         $return  = $this->apiCommonLst($command);
+        return $this->render('list-content',['data'=>$return,'apiHost'=>$this->apiHost]);
     }
 
 
     public function actionApiCate()
     {
-        $like = '2';
-        $cate = 22;
+        // $cate = 22;
         $request = Yii::$app->request;
         $like = ArrayHelper::getValue($request->post(),'search');
         $cate = ArrayHelper::getValue($request->get(),'cate');
@@ -106,7 +114,16 @@ class IndexController extends BaseController
         $query->andFilterWhere(['cate'=>$cate])
               ->andFilterWhere(['status'=>BaseMessage::STATUS_ACTIVE]);
         $command = $query->createCommand();
+        // echo $command->sql;
         $return  = $this->apiCommonLst($command);
+        // dump($return);
+        // dump($command->params);
+        $url = ['view_url'=>Url::toRoute(['index/api-detail']),'edit_url'=>Url::toRoute(['index/api-edit'])];
+        /*if (!empty($request->isPost)) {
+            dump(111);
+            echo json_encode(['url'=>'www.baidu.com']); exit;
+        }*/
+        return $this->render('list-content',['data'=>$return,'url'=>$url,'post_url'=>Url::toRoute(['index/api-cate']),'apiHost'=>$this->apiHost]);
     }
 
     /**

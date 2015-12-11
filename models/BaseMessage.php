@@ -86,7 +86,10 @@ class BaseMessage extends \yii\db\ActiveRecord
         $return_return = $this->dealRealReturnParam(ArrayHelper::getValue($deal_data,'ReturnParam'),$b_id);
         $code_return   = $this->dealRelReturnCode(ArrayHelper::getValue($deal_data,'ReturnCode'),$b_id);
         $error_return  = $this->dealRelErrorMsg(ArrayHelper::getValue($deal_data,'ErrorMessage'),$b_id);
-        return $post_return*$return_return*$code_return*$error_return;
+        if ($post_return || $return_return || $code_return || $error_return) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -104,7 +107,10 @@ class BaseMessage extends \yii\db\ActiveRecord
         $return_return = $this->editRelReturnParam(ArrayHelper::getValue($deal_data,'ReturnParam'),$b_id);
         $code_return   = $this->editRelReturnCode(ArrayHelper::getValue($deal_data,'ReturnCode'),$b_id);
         $error_return  = $this->editRelErrorMsg(ArrayHelper::getValue($deal_data,'ErrorMessage'),$b_id);
-        return $post_return*$return_return*$code_return*$error_return;
+        if ($post_return || $return_return || $code_return || $error_return ) {
+            return true;
+        }
+        return false;;
     }
 
 
@@ -127,9 +133,12 @@ class BaseMessage extends \yii\db\ActiveRecord
     public function dealRelPostParam($data,$b_id='')
     {
         $return = false;
+        if (empty($data)) {
+            return false;
+        }
         $dataLst = $this->dealParamCommon($data);
         foreach ($dataLst as $ko => $vo) {
-            $check_name = ArrayHelper::getValue($vo,'name','');
+            $check_name = ArrayHelper::getValue($vo,'name');
             if (empty($check_name)) {
                 ArrayHelper::remove($dataLst,$ko);
             } else {
@@ -164,6 +173,9 @@ class BaseMessage extends \yii\db\ActiveRecord
     public function dealRealReturnParam($data,$b_id='')
     {
         $return = false;
+        if (empty($data)) {
+            return false;
+        }
         $dataLst = $this->dealParamCommon($data);
         foreach ($dataLst as $ko => $vo) {
             $check_name = ArrayHelper::getValue($vo,'name','');
@@ -194,6 +206,7 @@ class BaseMessage extends \yii\db\ActiveRecord
      */
     public function editRelReturnParam($data,$b_id='')
     {
+        dump($data);
         $base    = ReturnParam::deleteAll(['b_id'=>$b_id]);
         $return  = $this->dealRealReturnParam($data,$b_id);
         return $return;
@@ -228,6 +241,9 @@ class BaseMessage extends \yii\db\ActiveRecord
      */
     public function editRelReturnCode($data,$b_id='')
     {
+        if (empty($data) || empty($data['data'])) {
+            return false;
+        }
         $post['ReturnCode'] = $data; 
         $model = ReturnCode::find()->where(['status'=>1,'b_id'=>$b_id])->one();
         if ($model->load($post) && $model->save()) {
@@ -240,6 +256,9 @@ class BaseMessage extends \yii\db\ActiveRecord
     public function dealRelErrorMsg($data,$b_id='')
     {
         $return = false;
+        if (empty($data)) {
+            return false;
+        }
         $dataLst = $this->dealParamCommon($data);
         foreach ($dataLst as $ko => $vo) {
             $check_name = ArrayHelper::getValue($vo,'errorcode','');

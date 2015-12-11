@@ -44,9 +44,15 @@
                       <input type="hidden" name="BasicMessage[id]" value="<?=$base_message['id']?>">
                   </div>
                   <div class="form-group">
-                    <label for="inputPassword" class="col-sm-2 control-label">接口名称：</label>
+                    <label for="inputName" class="col-sm-2 control-label">接口名称：</label>
                     <div class="col-sm-10">
                       <input type="text" class="form-control" id="" name="BasicMessage[name]" placeholder="分类名称" value="<?=$base_message['name']?>">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputUrl" class="col-sm-2 control-label">接口名称：</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="" name="BasicMessage[url]" placeholder="分类名称" value="<?=$base_message['url']?>">
                     </div>
                   </div>
                   <div class="form-group">
