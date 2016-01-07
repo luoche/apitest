@@ -20,8 +20,44 @@
         <![endif]-->
         <div class="container center-block">
           
-           <h2>接口标题</h2>
-           
+           <h2><?=$base_message['name']?></h2>
+           <h4>请求地址:<?=$apiHost?><?=$base_message['url']?></h4>
+            
+          <div class=" alert-info title">info:</div>
+          <div style="background-color:#26A8FA">
+              <h4>&nbsp;&nbsp;&nbsp;&nbsp;post:returnType字段介绍</h4>
+                <div>
+                  <ul>
+                    <li>3: &nbsp;&nbsp;JSON返回类型(默认)</li>
+                    <li>4: &nbsp;&nbsp;XML返回类型</li>
+                  </ul>
+                </div>
+                <h4>&nbsp;&nbsp;&nbsp;&nbsp;返回字段介绍</h4>
+                <div>
+                    <ol>
+                      <li>errorcode:&nbsp;&nbsp;错误代码
+                        <ul>
+                          <li>0 => OK</li>
+                          <li>1 => 参数不正确</li>
+                          <li>2 => 参数缺失</li>
+                          <li>3 => 找不到数据</li>
+                          <li>4 => 数据已经存在</li>
+                          <li>5 => 非法操作</li>
+                          <li>6 => 未知错误</li>
+                          <li>7 => 非法请求</li>
+                        </ul>
+                      </li>
+                      <li>msgs:&nbsp;&nbsp;返回信息</li>
+                      <li>data:&nbsp;&nbsp;返回数据</li>
+                    </ol>
+                </div>  
+          </div>
+          
+          <?php if(!empty($base_message['author'])):?>
+             <div class=" alert-info title">作者</div>
+             <p class=""><?=$base_message['author']?></p>
+          <?php endif;?>
+          
            <div class=" alert-info title">请求方式</div>
            <p class=""><?=$base_message['method']?></p>
            

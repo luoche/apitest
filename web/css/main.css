@@ -113,18 +113,18 @@ p { padding-left: 10px;}
     width: 220px; 
     border-right: 1px solid #ddd;
     padding: 0; 
-    background-color: #6f6f6f;
+    background-color: #f8f8f8;
     margin-top: 1px;
     overflow: auto;
 }
 /*left-bar 滚动条*/
 
-.left-bar a { color: #fff;}
+.left-bar a { color: #333;}
 .left-bar a:visited, .left-bar a:active { text-decoration: none;}
 .left-bar .b-b { border-bottom: 1px solid #4d4d4d;}
 .nav-item { display: block; padding: 10px 0 10px 20px; color: #fff;}
 .nav-item i { display: inline-block; width: 5px; height: 5px;}
-.child-nav { padding: 0; background-color: #4f4f4f;}
+.child-nav { padding: 0; background-color: #F8F8F8;}
 .child-nav a { display: block; padding: 5px 0 5px 50px;}
 .child-nav a:hover { background-color: #7d7d7d;}
 /*api内容框*/

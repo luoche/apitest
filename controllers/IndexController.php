@@ -50,7 +50,7 @@ class IndexController extends BaseController
         $request  = Yii::$app->request;
         $id       = ArrayHelper::getValue($request->get(),'id',1);
         $all_info = $this->getApiDetail($id);
-        return $this->render('view',['base_message'=>$all_info['base_message'],'post_param'=>$all_info['post_param'],'return_param'=>$all_info['return_param'],'return_code'=>$all_info['return_code'],'error_msg'=>$all_info['error_msg']]);
+        return $this->render('view',['base_message'=>$all_info['base_message'],'post_param'=>$all_info['post_param'],'return_param'=>$all_info['return_param'],'return_code'=>$all_info['return_code'],'error_msg'=>$all_info['error_msg'],'apiHost'=>$this->apiHost]);
     }
 
     public function actionApiEdit($id=1)
